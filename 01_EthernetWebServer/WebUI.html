@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tim's Page</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+        let outtext = "";
+    </script>
+
+
+</head>
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+</style>
+
+<body>
+    <h1>Hello and welcome to Tim's page!</h1>
+    <table style="width:50%">
+
+        <tr>
+            <td>A Javascript clock</td>
+            <td>The time is:</td>
+            <td>
+                <div id="clock"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>PHP counter</td>
+            <td>Calls python increment 1 every s</td>
+            <td>
+                <div id="txt"></div>
+            </td>
+
+        </tr>
+
+
+
+        <tr>
+            <td>Button Increment</td>
+            <td>Click to add 2</td>
+            <td>
+                <div id="button"></div>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Tim's</td>
+            <td>Website</td>
+            <td>In Japans</td>
+        </tr>
+    </table>
+    <button onclick="buttonincrement()">AJAX</button>
+
+    <script>
+
+        //normal way
+
+        document.getElementById('txt').innerHTML = 0;
+        document.getElementById('clock').innerHTML = "----";
+        document.getElementById('button').innerHTML = 0;
+        buttoninc = 0
+
+        function buttonincrement() {
+
+            jQuery.ajax({
+                type: "POST",
+                url: 'http://192.168.50.142/?7',
+                //dataType: 'json',
+                //data: { arg1: buttoninc, arg2: 2 },
+
+                success: function (outdata, outtext) {
+                    buttoninc = outdata;
+
+                }
+            }
+            );
+
+            document.getElementById('button').innerHTML = buttoninc
+        }
+
+        
+
+        let name = "hellop";
+        console.log(buttoninc);
+    </script>
+
+
+
+
+</body>
+
+</html>

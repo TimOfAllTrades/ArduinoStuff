@@ -20,7 +20,7 @@ void setup(){
 
   //Pins 10,11,12 & 13 are used by the ethernet shield
 
-  pinMode(2, OUTPUT);
+  pinMode(2, INPUT);
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
@@ -58,7 +58,7 @@ void checkForClient(){
       if (client.available()) {
 
         if(!sentHeader){
-          // send a standard http response header
+          // send a standard http response header, only checked on the first iteration
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: text/html");
           client.println();
@@ -120,7 +120,7 @@ void checkForClient(){
 
       }
     }
-
+    ReadToggle(2, client);
     delay(1); // give the web browser time to receive the data
     client.stop(); // close the connection:
 
@@ -138,4 +138,10 @@ void triggerPin(int pin, EthernetClient client){
   delay(25);
   digitalWrite(pin, LOW);
   delay(25);
+}
+
+void ReadToggle(int pin, EthernetClient client)
+{
+  client.print("Button status ");
+  client.print(digitalRead(pin));
 }

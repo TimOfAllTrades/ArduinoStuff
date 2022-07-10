@@ -4,21 +4,37 @@
 
 <h1>The XMLHttpRequest Object</h1>
 
-<button type="button" onclick="loadDoc()">Request data</button>
+<button type="button" onclick="httpGet()">Request data</button>
 
 <p id="demo"></p>
 
 
 <script>
-function loadDoc() {
+function gethttp(theURL) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML = this.responseText;
+      return xmlhttp.responseText;
     }
   };
-  xhttp.open("GET", "http://192.168.50.142/?789", true);
+  xhttp.open("GET", theURL, false);
   xhttp.send();
+}
+function httpGet()
+{
+    
+        xmlhttp=new XMLHttpRequest();
+    
+    
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            return xmlhttp.responseText;
+        }
+    }
+    xmlhttp.open("GET", "http://192.168.50.142/?789", false );
+    xmlhttp.send();    
 }
 </script>
 

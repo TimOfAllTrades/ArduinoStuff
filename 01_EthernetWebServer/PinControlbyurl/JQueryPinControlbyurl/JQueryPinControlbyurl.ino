@@ -110,11 +110,11 @@ void checkForClient(){
 
         }
         
-        if (c == 'E' && currentLineIsBlank)  break;
+        if (c == '\n' && currentLineIsBlank)  break;
 
-        if (c == 'E') {
+        if (c == '\n') {
           currentLineIsBlank = true;
-        }else if (c != 'E') {
+        }else if (c != '\r') {
           currentLineIsBlank = false;
         }
 
@@ -123,6 +123,7 @@ void checkForClient(){
       }
     }
     //ReadToggle(2, client);
+    client.write(1);
     delay(1); // give the web browser time to receive the data
     client.stop(); // close the connection:
 
@@ -144,6 +145,6 @@ void triggerPin(int pin, EthernetClient client){
 
 void ReadToggle(int pin, EthernetClient client)
 {
-  client.print("Button status ");
+  client.print("Button status");
   client.print(digitalRead(pin));
 }

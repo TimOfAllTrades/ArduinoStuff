@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tim's Page</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+        let outtext = "";
+    </script>
+
+</head>
+<body>
+
+
+<h1>The XMLHttpRequest Object</h1>
+
+<button type="button" onclick="buttonincrement()">Request data</button>
+
+<p id="demo"></p>
+
+
+<script>
+
+function buttonincrement() {
+
+jQuery.get('http://192.168.50.142/?789789789', null, function(text) {
+    alert($(text).find('#clock'));
+});
+
+
+}
+</script>
+
+</body>
+</html>

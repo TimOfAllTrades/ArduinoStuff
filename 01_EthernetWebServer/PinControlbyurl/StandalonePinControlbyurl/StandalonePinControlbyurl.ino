@@ -117,10 +117,14 @@ void checkForClient(){
         }else if (c != '\r') {
           currentLineIsBlank = false;
         }
-
+        
       }
     }
     ReadToggle(2, client);
+    client.println("<div id=\"clock\"></div>");
+    client.println("<script>");
+    client.println("document.getElementById('clock').innerHTML = \"----\";");
+    client.println("</script>");
     delay(1); // give the web browser time to receive the data
     client.stop(); // close the connection:
 

@@ -1,0 +1,4 @@
+import urllib.request
+contents = urllib.request.urlopen("http://example.com/foo/bar").read()
+
+#this seems to be the only way that works since any attempts to access javascript code on the arduino results in the SOP error.

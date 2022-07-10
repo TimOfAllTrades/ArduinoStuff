@@ -76,35 +76,35 @@ void checkForClient(){
            switch (c) {
             case '2':
               //add code here to trigger on 2
-              triggerPin(2, client);
+              triggerPin(2, client, c);
               break;
             case '3':
             //add code here to trigger on 3
-              triggerPin(3, client);
+              triggerPin(3, client, c);
               break;
             case '4':
             //add code here to trigger on 4
-              triggerPin(4, client);
+              triggerPin(4, client, c);
               break;
             case '5':
             //add code here to trigger on 5
-              triggerPin(5, client);
+              triggerPin(5, client, c);
               break;
             case '6':
             //add code here to trigger on 6
-              triggerPin(6, client);
+              triggerPin(6, client, c);
               break;
             case '7':
             //add code here to trigger on 7
-              triggerPin(7, client);
+              triggerPin(7, client, c);
               break;
             case '8':
             //add code here to trigger on 8
-              triggerPin(8, client);
+              triggerPin(8, client, c);
               break;
             case '9':
             //add code here to trigger on 9
-              triggerPin(9, client);
+              triggerPin(9, client, c);
               break;
           }
 
@@ -128,10 +128,12 @@ void checkForClient(){
 
 }
 
-void triggerPin(int pin, EthernetClient client){
+void triggerPin(int pin, EthernetClient client, char c){
 //blink a pin - Client needed just for HTML output purposes.  
   client.print("Turning on pin ");
-  client.println(pin);
+  client.print(pin);
+  client.print(" Current Char ");
+  client.println(c);
   client.print("<br>");
 
   digitalWrite(pin, HIGH);

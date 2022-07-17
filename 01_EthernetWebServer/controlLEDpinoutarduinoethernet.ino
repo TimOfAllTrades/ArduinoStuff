@@ -5,9 +5,9 @@ boolean reading = false;
 ////////////////////////////////////////////////////////////////////////
 //CONFIGURE
 ////////////////////////////////////////////////////////////////////////
-  byte ip[] = { 192, 168, 50, 177 };   //Manual setup only
-  byte gateway[] = { 192, 168, 50, 1 }; //Manual setup only
-  byte subnet[] = { 255, 255, 255, 0 }; //Manual setup only
+  //byte ip[] = { 192, 168, 50, 177 };   //Manual setup only
+  //byte gateway[] = { 192, 168, 0, 1 }; //Manual setup only
+  //byte subnet[] = { 255, 255, 255, 0 }; //Manual setup only
 
   // if need to change the MAC address (Very Rare)
   byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
@@ -20,7 +20,7 @@ void setup(){
 
   //Pins 10,11,12 & 13 are used by the ethernet shield
 
-  pinMode(2, INPUT);
+  pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
@@ -58,7 +58,7 @@ void checkForClient(){
       if (client.available()) {
 
         if(!sentHeader){
-          // send a standard http response header, only checked on the first iteration
+          // send a standard http response header
           client.println("HTTP/1.1 200 OK");
           client.println("Content-Type: text/html");
           client.println();
@@ -76,35 +76,35 @@ void checkForClient(){
            switch (c) {
             case '2':
               //add code here to trigger on 2
-              triggerPin(2, client, c);
+              triggerPin(2, client);
               break;
             case '3':
             //add code here to trigger on 3
-              triggerPin(3, client, c);
+              triggerPin(3, client);
               break;
             case '4':
             //add code here to trigger on 4
-              triggerPin(4, client, c);
+              triggerPin(4, client);
               break;
             case '5':
             //add code here to trigger on 5
-              triggerPin(5, client, c);
+              triggerPin(5, client);
               break;
             case '6':
             //add code here to trigger on 6
-              triggerPin(6, client, c);
+              triggerPin(6, client);
               break;
             case '7':
             //add code here to trigger on 7
-              triggerPin(7, client, c);
+              triggerPin(7, client);
               break;
             case '8':
             //add code here to trigger on 8
-              triggerPin(8, client, c);
+              triggerPin(8, client);
               break;
             case '9':
             //add code here to trigger on 9
-              triggerPin(9, client, c);
+              triggerPin(9, client);
               break;
           }
 
@@ -117,19 +117,10 @@ void checkForClient(){
         }else if (c != '\r') {
           currentLineIsBlank = false;
         }
-        
+
       }
     }
-    ReadToggle(2, client);
-    client.print("<br>");
-    client.println(client.remoteIP()[0]);
-    client.println(client.remoteIP()[1]);
-    client.print("<br>");
-    if (client.remoteIP()[0] == 192 && client.remoteIP()[1] == 168){
-      client.print("Local IP detected");
-    }
-    
-    
+
     delay(1); // give the web browser time to receive the data
     client.stop(); // close the connection:
 
@@ -137,22 +128,14 @@ void checkForClient(){
 
 }
 
-void triggerPin(int pin, EthernetClient client, char c){
+void triggerPin(int pin, EthernetClient client){
 //blink a pin - Client needed just for HTML output purposes.  
   client.print("Turning on pin ");
-  client.print(pin);
-  client.print(" Current Char ");
-  client.println(c);
+  client.println(pin);
   client.print("<br>");
 
   digitalWrite(pin, HIGH);
   delay(25);
   digitalWrite(pin, LOW);
   delay(25);
-}
-
-void ReadToggle(int pin, EthernetClient client)
-{
-  client.print("Button status ");
-  client.print(digitalRead(pin));
 }
